@@ -3,102 +3,120 @@
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, PIN, NEO_GRB + NEO_KHZ800);
 
-
-int redScore[17];
+int redScore[15];
 int sine[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}; //these are the pixels in order of animation-- 36 pixels in total
+int sineTwo[] = {15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
 int button = 9;
 int lightButton = 0;
-
 int lightot = 0;
-
 int test = 0;
+
+int bluelightot = 16;
+int blueLight = 0;
+
+
+int numComparison = 0;
+
 void setup() {
-  
+
   Serial.begin(9600);
   strip.begin();
   strip.setBrightness(50); //adjust brightness here
   strip.show(); // Initialize all pixels to 'off'
   pinMode(9, INPUT);
-  
+
 }
+
+
+
 
 void loop() {
-
-arrayCheck();
-   for (int i = lightot; i <= lightot + 1; ++i){
-          Serial.println("i at first");
-          Serial.println(i);
-          Serial.println("Lightot at first");
-          Serial.println(lightot);
-        arraycomp(i);
-    
-          
-            if(digitalRead(9) == HIGH){
-                strip.setPixelColor(sine[0], strip.Color(250, 100, 100));
-                redScore[i] = 10;
-                Serial.println("were in the high");
-                Serial.println(i);
-                Serial.println(lightot);
-                delay(100);
-                while(digitalRead(9) == HIGH){}
-                    
-             }// end if for button push
-
-             
-    
-        strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
-
-        noColor(i);
-        strip.show();
-        lightot += 1;
-      /*  Serial.println("i");
-        Serial.println(i);
-        Serial.println();
-        Serial.println("lightotal");
-        Serial.println(lightot);
-      */
-        
-        if(lightot == 16){
-           lightot = 0;
-        } // end lightot if
-
-    
-  } // end main for loop
-
+  redRun();
+  blueRun();
 }// end void loop
 
-void arraycomp(int i){
- // Serial.println("THIS IS RIGHT NOW");
- // Serial.println(i);
+void blueRun() {
+  for (int i = 16; i >= 0; --i) {
+    strip.setPixelColor(sine[i], strip.Color(0, 0, 250));
+    BlueColor(i);
 
-  for(int r = 0; r <= 16; ++r){
-    
-      if(redScore[r] == i){
-        strip.setPixelColor(sine[i], strip.Color(250, 100, 100));
-        //Serial.println("TRUE");
-          //Serial.println(i);
-        } 
-    } 
+  } // end for loop
+
+
 }
 
-void arrayCheck(){
-  for(int i = 0; i <= 32; ++i){
-    //Serial.println(redScore[i]);
-  }
-}
+void redRun() {
+  for (int i = lightot; i <= lightot + 2; ++i) {
+
+    /* Serial.println("i at first");
+      Serial.println(i);
+      Serial.println("Lightot at first");
+      Serial.println(lightot);
+    */
+
+    strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
+    noColor(i);
+    arraycomp(i);
+    lightot += 1;
+    /*  Serial.println("i");
+      Serial.println(i);
+      Serial.println();
+      Serial.println("lightotal");
+      Serial.println(lightot);
+    */
+    if (digitalRead(9) == HIGH) {
+      strip.setPixelColor(sine[i], strip.Color(250, 100, 100));
+      redScore[i] = 1;
+      delay(100);
+      while (digitalRead(9) == HIGH) {}
+
+    }// end if for button push
+
+
+    if (lightot == 16) {
+      lightot = 0;
+    } // end lightot if
+
+
+  } // end main for loop
+
+}// end for Red Void
+
+
+void arraycomp(int i) {
+  numComparison = i;
+  for (int r = 0; r <= 16; ++r) {
+    if (redScore[r] == 1) {
+      strip.setPixelColor(sine[r], strip.Color(250, 100, 100));
+    } // end for if statement
+  } // end for for loop
+} // end for void arraycomp
+
+void BlueColor(int i) {
+
+
+  strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+  strip.setPixelColor(sine[i + 1], strip.Color(0, 0, 0));
+  strip.show();
+  delay(40); // controls how slow the light moves in a circle\
+
+}// end of noBlueColor
+
 
 
 void noColor(int i) {
-   
-    strip.setPixelColor(sine[i - 1], strip.Color(0, 0, 0));
-    strip.show();
-    delay(500); // controls how slow the light moves in a circle 
-    strip.setPixelColor(sine[15], strip.Color(0,0,0));  
-    //Serial.println(i);
+
+  strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+  strip.setPixelColor(sine[i - 1], strip.Color(0, 0, 0));
+  strip.show();
+  delay(40); // controls how slow the light moves in a circle\
+
 }
 
-void looplimit(){
-  if(lightot == 15){
+
+
+void looplimit() {
+  if (lightot == 15) {
     lightot = 0;
-  }
-}
+  }// end if statement
+} // end void looplimit
