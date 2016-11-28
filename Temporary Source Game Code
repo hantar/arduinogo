@@ -57,6 +57,7 @@ void redRun() {
     strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
     noColor(i);
     arraycomp(i);
+
     lightot += 1;
     /*  Serial.println("i");
       Serial.println(i);
@@ -106,10 +107,12 @@ void BlueColor(int i) {
 
 void noColor(int i) {
 
-  strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+  
   strip.setPixelColor(sine[i - 1], strip.Color(0, 0, 0));
+  //strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
   strip.show();
-  delay(40); // controls how slow the light moves in a circle\
+  strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+  delay(40); // controls how slow the light moves in a circle
 
 }
 
