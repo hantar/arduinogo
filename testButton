@@ -1,0 +1,16 @@
+// testRingBut.ino
+
+int BUTTON = 9;
+
+void setup() {
+	pinMode(BUTTON, INPUT);
+	Serial.begin(9600);
+}
+
+void loop() {
+	if (digitalRead(BUTTON) == HIGH) {
+		Serial.print('3');
+		delay(10);
+	}
+}
+
