@@ -23,6 +23,10 @@
 #include "Adafruit_LEDBackpack.h"
 #include "Adafruit_GFX.h"
 
+const int buttonPin = 2;     // the number of the pushbutton pin
+const int GrnLed =  12;// the number of the green LED pin
+const int RedLed =  13;// the number of the red LED pin
+int buttonState = 0;         // variable for reading the pushbutton status
 Adafruit_8x8matrix matrix = Adafruit_8x8matrix();
 
 void setup() {
@@ -30,6 +34,12 @@ void setup() {
   Serial.println("8x8 LED Matrix Test");
   matrix.begin(0x70);  // pass in the address
   
+  
+   // initialize the LED pin as an output:
+  pinMode(GrnLed, OUTPUT);
+  pinMode(RedLed, OUTPUT);
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);
 
 }
 
@@ -209,6 +219,29 @@ row5[] = {
 ;
 
 void loop() {
+  matrix.clear();
+   // read the state of the pushbutton value:
+  buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed.
+  // if it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    // turn LED on:
+    digitalWrite(GrnLed, HIGH);
+    runtimer();
+  }
+  else {
+    // turn LED off:
+    digitalWrite(GrnLed, LOW);
+  }
+  
+  
+  
+  
+ 
+}
+
+void runtimer(){
   matrix.setBrightness(0);
   for(int8_t x = 3; x != 0; x--){
   matrix.setRotation(0);
@@ -337,22 +370,14 @@ void loop() {
   matrix.setTextSize(1);
   matrix.setTextWrap(false);  // we dont want text to wrap so it scrolls nicely
   matrix.setTextColor(LED_ON);
-  for (int8_t x=0; x>=-36; x--) {
+  for (int8_t x=0; x>=-54; x--) {
     matrix.clear();
     matrix.setCursor(x,0);
-    matrix.print("Hello");
+    matrix.print("Game Over");
     matrix.writeDisplay();
     delay(100);
-  }
-  matrix.setRotation(3);
-  for (int8_t x=7; x>=-36; x--) {
     matrix.clear();
-    matrix.setCursor(x,0);
-    matrix.print("World");
-    matrix.writeDisplay();
-    delay(100);
   }
+
   matrix.setRotation(0);
-  
- 
 }
