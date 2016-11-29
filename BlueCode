@@ -1,0 +1,83 @@
+#include <Adafruit_NeoPixel.h>
+#define PIN 6 //marked D1 on GEMMA
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, PIN, NEO_GRB + NEO_KHZ800);
+
+int blueScore[16];
+int sine[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}; //these are the pixels in order of animation-- 36 pixels in total
+int button = 9;
+int lightButton = 0;
+int lightot = 0;
+int test = 0;
+
+bool startButton = false;
+
+bool game = false;
+
+int numComparison = 0;
+
+void setup() {
+  pinMode(10, OUTPUT);
+  Serial.begin(9600);
+  strip.begin();
+  strip.setBrightness(50); //adjust brightness here
+  strip.show(); // Initialize all pixels to 'off'
+  pinMode(9, INPUT);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if (digitalRead(3) == LOW) {
+  }
+  else if (digitalRead(3) == HIGH) {
+    delay(3000);
+    startButton = true;
+    while (startButton == true) {
+      blueRun();
+    }
+  }
+}
+
+
+void blueRun() {
+
+
+  for (int i = lightot; i <= lightot + 2; ++i) {
+    strip.setPixelColor(sine[i], strip.Color(0, 0, 250));
+    noColor(i);
+    arraycomp(i);
+    lightot += 1;
+
+    if (digitalRead(9) == HIGH) {
+      strip.setPixelColor(sine[i], strip.Color(100, 100, 250));
+      Serial.println(i);
+      blueScore[i] = 1;
+      delay(100);
+      while (digitalRead(9) == HIGH) {}
+    }// end if for button push
+
+
+    if (lightot == 16) {
+      lightot = 0;
+    } // end lightot if
+  } // end main for loop
+}
+
+
+void arraycomp(int i) {
+  for (int i = 0; i <= 16; ++i) {
+    if (blueScore[i] == 1) {
+      strip.setPixelColor(sine[i], strip.Color(100, 100, 250));
+    } // end for if statement
+  } // end for for loop
+} // end for void arraycomp
+
+
+void noColor(int i) {
+
+  strip.setPixelColor(sine[i - 1], strip.Color(0, 0, 0));
+  delay(100); // controls how slow the light moves in a circle
+  strip.show();
+
+}
