@@ -19,11 +19,12 @@ int numComparison = 0;
 
 void setup() {
 
-  Serial.begin(9600);
-  strip.begin();
-  strip.setBrightness(50); //adjust brightness here
-  strip.show(); // Initialize all pixels to 'off'
-  pinMode(9, INPUT);
+	Serial.begin(9600);
+	strip.begin();
+	strip.setBrightness(50); //adjust brightness here
+	strip.show(); // Initialize all pixels to 'off'
+	pinMode(9, INPUT);
+	pinMode(11, OUTPUT);
 
 }
 
@@ -31,75 +32,78 @@ void setup() {
 
 
 void loop() {
-  redRun();
+	redRun();
 
 }// end void loop
 
 void blueRun() {
-  for (int i = 16; i >= 0; --i) {
-    strip.setPixelColor(sine[i], strip.Color(0, 0, 250));
-    BlueColor(i);
+	for (int i = 16; i >= 0; --i) {
+		strip.setPixelColor(sine[i], strip.Color(0, 0, 250));
+		BlueColor(i);
 
-  } // end for loop
+	} // end for loop
 
 
 }
 
 void redRun() {
-  for (int i = lightot; i <= lightot + 2; ++i) {
+	for (int i = lightot; i <= lightot + 2; ++i) {
 
-    /* Serial.println("i at first");
-      Serial.println(i);
-      Serial.println("Lightot at first");
-      Serial.println(lightot);
-    */
+		/* Serial.println("i at first");
+		  Serial.println(i);
+		  Serial.println("Lightot at first");
+		  Serial.println(lightot);
+		*/
 
-    strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
-    noColor(i);
-    arraycomp(i);
+		strip.setPixelColor(sine[i], strip.Color(0, 0, 250));
+		noColor(i);
+		arraycomp(i);
 
-    lightot += 1;
-    /*  Serial.println("i");
-      Serial.println(i);
-      Serial.println();
-      Serial.println("lightotal");
-      Serial.println(lightot);
-    */
-    if (digitalRead(9) == HIGH) {
-      strip.setPixelColor(sine[i], strip.Color(250, 100, 100));
-      redScore[i] = 1;
-      delay(100);
-      while (digitalRead(9) == HIGH) {}
+		lightot += 1;
+		/*  Serial.println("i");
+		  Serial.println(i);
+		  Serial.println();
+		  Serial.println("lightotal");
+		  Serial.println(lightot);
+		*/
+		if (digitalRead(9) == HIGH) {
+			Serial.println('3');
+			strip.setPixelColor(sine[i], strip.Color(100, 100, 250));
+			//oldI = i;
+			//if (i != oldI)
+			redScore[i] = 1;
+			delay(100);
+			while (digitalRead(9) == HIGH) {}
 
-    }// end if for button push
-
-
-    if (lightot == 16) {
-      lightot = 0;
-    } // end lightot if
+		}// end if for button push
 
 
-  } // end main for loop
+		if (lightot == 16) {
+		lightot = 0;
+	} // end lightot if
+
+
+} // end main for loop
 
 }// end for Red Void
 
 
 void arraycomp(int i) {
-  numComparison = i;
-  for (int r = 0; r <= 16; ++r) {
-    if (redScore[r] == 1) {
-      strip.setPixelColor(sine[r], strip.Color(250, 100, 100));
-    } // end for if statement
-  } // end for for loop
+	numComparison = i;
+	for (int r = 0; r <= 16; ++r) {
+		if (redScore[r] == 1) {
+			strip.setPixelColor(sine[r], strip.Color(100, 100, 250));
+		} // end for if statement
+	} // end for for loop
 } // end for void arraycomp
 
 void BlueColor(int i) {
 
 
-  strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
-  strip.setPixelColor(sine[i + 1], strip.Color(0, 0, 0));
-  strip.show();
-  delay(40); // controls how slow the light moves in a circle\
+	strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+	strip.setPixelColor(sine[i + 1], strip.Color(0, 0, 0));
+	strip.show();
+	delay(40); // controls how slow the light moves in a circle\
 
 }// end of noBlueColor
 
@@ -107,19 +111,19 @@ void BlueColor(int i) {
 
 void noColor(int i) {
 
-  
-  strip.setPixelColor(sine[i - 1], strip.Color(0, 0, 0));
-  //strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
-  strip.show();
-  strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
-  delay(40); // controls how slow the light moves in a circle
+
+	strip.setPixelColor(sine[i - 1], strip.Color(0, 0, 0));
+	//strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+	strip.show();
+	strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+	delay(40); // controls how slow the light moves in a circle
 
 }
 
 
 
 void looplimit() {
-  if (lightot == 15) {
-    lightot = 0;
-  }// end if statement
+	if (lightot == 15) {
+		lightot = 0;
+	}// end if statement
 } // end void looplimit
