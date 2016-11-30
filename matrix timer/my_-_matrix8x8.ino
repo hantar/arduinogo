@@ -4,8 +4,8 @@
 
 const int buttonPin = 2;     // the number of the pushbutton pin
 const int GrnLed =  12;// the number of the green LED pin
-const int RedLed =  13;// the number of the red LED pin
 int buttonState = 0;         // variable for reading the pushbutton status
+int buzzer = 13;       //buzzer pin is 11
 Adafruit_8x8matrix matrix = Adafruit_8x8matrix();
 
 void setup() {
@@ -16,8 +16,7 @@ void setup() {
   
    // initialize the LED pin as an output:
   pinMode(GrnLed, OUTPUT);
-  pinMode(RedLed, OUTPUT);
-  // initialize the pushbutton pin as an input:
+   // initialize the pushbutton pin as an input:
   pinMode(buttonPin, INPUT);
 
 }
@@ -42,8 +41,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B10000000,
   B00000000,
   B00000000,
@@ -51,8 +50,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11000000,
   B00000000,
   B00000000,
@@ -60,8 +59,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11100000,
   B00000000,
   B00000000,
@@ -69,8 +68,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11110000,
   B00000000,
   B00000000,
@@ -78,8 +77,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111000,
   B00000000,
   B00000000,
@@ -87,8 +86,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111100,
   B00000000,
   B00000000,
@@ -96,8 +95,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111110,
   B00000000,
   B00000000,
@@ -105,8 +104,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B00000000,
   B00000000,
@@ -114,8 +113,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B10000000,
   B00000000,
@@ -123,8 +122,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11000000,
   B00000000,
@@ -132,8 +131,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11100000,
   B00000000,
@@ -141,8 +140,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11110000,
   B00000000,
@@ -150,8 +149,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111000,
   B00000000,
@@ -159,8 +158,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111100,
   B00000000,
@@ -168,8 +167,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111110,
   B00000000,
@@ -177,8 +176,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B00000000,
@@ -186,8 +185,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B10000000,
@@ -195,8 +194,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11000000,
@@ -204,8 +203,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11100000,
@@ -213,8 +212,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11110000,
@@ -222,8 +221,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111000,
@@ -231,8 +230,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111100,
@@ -240,8 +239,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111110,
@@ -249,8 +248,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -258,8 +257,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -267,8 +266,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -276,8 +275,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -285,8 +284,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -294,8 +293,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -303,8 +302,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -312,8 +311,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -321,8 +320,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -330,8 +329,8 @@ const byte dots[][65] PROGMEM = {
   B00000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -339,8 +338,8 @@ const byte dots[][65] PROGMEM = {
   B10000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -348,8 +347,8 @@ const byte dots[][65] PROGMEM = {
   B11000000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -357,8 +356,8 @@ const byte dots[][65] PROGMEM = {
   B11100000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -366,8 +365,8 @@ const byte dots[][65] PROGMEM = {
   B11110000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -375,8 +374,8 @@ const byte dots[][65] PROGMEM = {
   B11111000,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -384,8 +383,8 @@ const byte dots[][65] PROGMEM = {
   B11111100,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -393,8 +392,8 @@ const byte dots[][65] PROGMEM = {
   B11111110,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -402,8 +401,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B00000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -411,8 +410,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B10000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -420,8 +419,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11000000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -429,8 +428,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11100000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -438,8 +437,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11110000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -447,8 +446,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111000,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -456,8 +455,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111100,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -465,8 +464,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111110,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -474,8 +473,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B00000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -483,8 +482,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B10000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -492,8 +491,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11000000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -501,8 +500,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11100000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -510,8 +509,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11110000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -519,8 +518,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111000,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -528,8 +527,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111100,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -537,8 +536,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111110,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -546,8 +545,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111111,
-  B00000000
-},{
+  B00000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -555,8 +554,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111111,
-  B10000000
-},{
+  B10000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -564,8 +563,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111111,
-  B11000000
-},{
+  B11000000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -573,8 +572,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111111,
-  B11100000
-},{
+  B11100000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -582,8 +581,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111111,
-  B11110000
-},{
+  B11110000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -591,8 +590,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111111,
-  B11111000
-},{
+  B11111000},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -600,8 +599,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111111,
-  B11111100
-},{
+  B11111100},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -609,8 +608,8 @@ const byte dots[][65] PROGMEM = {
   B11111111,
   B11111111,
   B11111111,
-  B11111110
-},{
+  B11111110},
+  {
   B11111111,
   B11111111,
   B11111111,
@@ -624,6 +623,7 @@ const byte dots[][65] PROGMEM = {
 
 
 void loop() {
+
   matrix.clear();
    // read the state of the pushbutton value:
   buttonState = digitalRead(buttonPin);
@@ -631,15 +631,17 @@ void loop() {
   // check if the pushbutton is pressed.
   // if it is, the buttonState is HIGH:
   if (buttonState == HIGH) {
-    // turn LED on:
-    digitalWrite(GrnLed, HIGH);
    runtimer();
   }
+  
   else {
     // turn LED off:
     digitalWrite(GrnLed, LOW);
   } 
+  
 }
+
+
 
 void runtimer(){
   matrix.setBrightness(0);
@@ -649,8 +651,9 @@ void runtimer(){
   matrix.setCursor(1,1);
   matrix.print(x);
   matrix.writeDisplay();
+  tone(buzzer,329,1000);
   delay(1000);
-
+  
   for (int8_t y=0; y>=-10; y--) {
     matrix.clear();
     matrix.setCursor(1,y);
@@ -663,17 +666,27 @@ void runtimer(){
   matrix.clear();
   matrix.drawBitmap(0, 0, go, 8, 8, LED_ON);
   matrix.writeDisplay();
+  tone(buzzer,987,1100);
   delay(1000);
 
-  for(int x = 64; x >= 0; x--){
+  // turn LED on:
+    digitalWrite(GrnLed, HIGH);
+
+  for(int counter = 64; counter >= 0; counter--){
   matrix.clear();
-  matrix.drawBitmap(0, 0, dots[x], 8, 8, LED_ON);
+  matrix.drawBitmap(0, 0, dots[counter], 8, 8, LED_ON);
   matrix.writeDisplay();
-  delay(1000);
+
+  if(counter == 10)
+    matrix.setBrightness(8);
+
+  delay(100);
   }
 
-
+  // turn LED off:
+  digitalWrite(GrnLed, LOW);
   //display "Game over"
+  matrix.setBrightness(0); //set brightness back to darkest
   matrix.setTextSize(1);
   matrix.setTextWrap(false);  // we dont want text to wrap so it scrolls nicely
   matrix.setTextColor(LED_ON);
@@ -689,3 +702,4 @@ void runtimer(){
   matrix.setRotation(0);
   
 }
+
