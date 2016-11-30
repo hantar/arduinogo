@@ -3,10 +3,10 @@
 #include "Adafruit_GFX.h"
 
 const int buttonPin = 2;     // the number of the pushbutton pin
-const int GrnLed =  12;// the number of the green LED pin
+const int GrnLed =  7;// the number of the green LED pin
 
 int buttonState = 0;         // variable for reading the pushbutton status
-int buzzer = 13;       //buzzer pin is 11
+int buzzer = 12;       //buzzer pin is 12
 
 Adafruit_8x8matrix matrix = Adafruit_8x8matrix();
 
@@ -647,6 +647,8 @@ void loop() {
 
 
 void CountDown(){
+
+  //countdown 3 2 1 
   matrix.setBrightness(0);
   for(int8_t x = 3; x != 0; x--){
   matrix.setRotation(0);
