@@ -4,22 +4,12 @@
 
 const int buttonPin = 2;     // the number of the pushbutton pin
 const int GrnLed =  12;// the number of the green LED pin
+
 int buttonState = 0;         // variable for reading the pushbutton status
 int buzzer = 13;       //buzzer pin is 11
+
 Adafruit_8x8matrix matrix = Adafruit_8x8matrix();
 
-void setup() {
-  Serial.begin(9600);
-  Serial.println("8x8 LED Matrix Test");
-  matrix.begin(0x70);  // pass in the address
-  
-  
-   // initialize the LED pin as an output:
-  pinMode(GrnLed, OUTPUT);
-   // initialize the pushbutton pin as an input:
-  pinMode(buttonPin, INPUT);
-
-}
 
 const byte go[] PROGMEM = {
   B00000000,
@@ -622,28 +612,41 @@ const byte dots[][65] PROGMEM = {
 };
 
 
-void loop() {
 
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("8x8 LED Matrix Test");
+  matrix.begin(0x70);  // pass in the address
+  
+  
+   // initialize the LED pin as an output:
+  pinMode(GrnLed, OUTPUT);
+   // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);
+
+}
+
+void loop() {
   matrix.clear();
    // read the state of the pushbutton value:
   buttonState = digitalRead(buttonPin);
 
+
+
   // check if the pushbutton is pressed.
   // if it is, the buttonState is HIGH:
   if (buttonState == HIGH) {
-   runtimer();
+    CountDown();
+    RunTimer();
+    GameOver();
   }
-  
-  else {
-    // turn LED off:
-    digitalWrite(GrnLed, LOW);
-  } 
-  
 }
 
 
 
-void runtimer(){
+
+void CountDown(){
   matrix.setBrightness(0);
   for(int8_t x = 3; x != 0; x--){
   matrix.setRotation(0);
@@ -671,17 +674,34 @@ void runtimer(){
 
   // turn LED on:
     digitalWrite(GrnLed, HIGH);
+}
+
+void RunTimer(){
 
   for(int counter = 64; counter >= 0; counter--){
   matrix.clear();
   matrix.drawBitmap(0, 0, dots[counter], 8, 8, LED_ON);
   matrix.writeDisplay();
 
-  if(counter == 10)
+  if(counter <= 9 && counter > 0){
     matrix.setBrightness(8);
-
-  delay(100);
+    tone(buzzer, 987, 250);
   }
+
+  if(counter == 0){
+    tone(buzzer, 200, 300);
+  }
+
+  delay(400);
+
+
+  }
+  
+
+  matrix.setRotation(0);
+}
+
+void GameOver(){
 
   // turn LED off:
   digitalWrite(GrnLed, LOW);
@@ -690,6 +710,7 @@ void runtimer(){
   matrix.setTextSize(1);
   matrix.setTextWrap(false);  // we dont want text to wrap so it scrolls nicely
   matrix.setTextColor(LED_ON);
+  
   for (int8_t x=0; x>=-54; x--) {
     matrix.clear();
     matrix.setCursor(x,0);
@@ -698,8 +719,7 @@ void runtimer(){
     delay(100);
     matrix.clear();
   }
-
-  matrix.setRotation(0);
-  
 }
+
+
 
