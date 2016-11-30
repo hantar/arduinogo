@@ -1,5 +1,9 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 6 //marked D1 on GEMMA
+/*
+Red Game Code for ArduinGo
+*/
+
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, PIN, NEO_GRB + NEO_KHZ800);
 
