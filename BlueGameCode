@@ -1,14 +1,23 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 6 //marked D1 on GEMMA
 
+/*
+Blue Game Code for ArduinGo
+*/
+
+
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, PIN, NEO_GRB + NEO_KHZ800);
 
 int blueScore[16];
+int redScore[16];
+
 int sine[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}; //these are the pixels in order of animation-- 36 pixels in total
 int button = 9;
 int lightButton = 0;
 int lightot = 0;
 int test = 0;
+
+int cat = 12;
 
 bool startButton = false;
 
@@ -31,6 +40,7 @@ void loop() {
   if (digitalRead(3) == LOW) {
   }
   else if (digitalRead(3) == HIGH) {
+    Serial.println('D');
     delay(3000);
     startButton = true;
     while (startButton == true) {
@@ -41,28 +51,38 @@ void loop() {
 
 
 void blueRun() {
-
-
   for (int i = lightot; i <= lightot + 2; ++i) {
     strip.setPixelColor(sine[i], strip.Color(0, 0, 250));
     noColor(i);
     arraycomp(i);
+    redArrayComp(i);
     lightot += 1;
 
     if (digitalRead(9) == HIGH) {
       strip.setPixelColor(sine[i], strip.Color(100, 100, 250));
-      Serial.println(i);
+      Serial.println('B');
       blueScore[i] = 1;
-      delay(100);
-      while (digitalRead(9) == HIGH) {}
+      redScore[i] = 0;
+      delay(10);
+      while(digitalRead(9) == HIGH){}
     }// end if for button push
 
+    if (Serial.read() == 'R') {  
+      strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
+      while(Serial.read() == 'S'){
+        delay(1);
+        }
+      Serial.println(i);
+      redScore[i] = 1;
+      blueScore[i] = 0;
+      delay(10);
+    }
 
     if (lightot == 16) {
       lightot = 0;
     } // end lightot if
   } // end main for loop
-}
+}// end for Blue Void
 
 
 void arraycomp(int i) {
@@ -73,11 +93,20 @@ void arraycomp(int i) {
   } // end for for loop
 } // end for void arraycomp
 
+void redArrayComp(int i) {
+
+  for (int i = 0; i <= 16; ++i) {
+    if (redScore[i] == 1) {
+      strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
+    } // end for if statement
+  } // end for for loop
+
+}
 
 void noColor(int i) {
 
   strip.setPixelColor(sine[i - 1], strip.Color(0, 0, 0));
-  delay(100); // controls how slow the light moves in a circle
+  delay(300); // controls how slow the light moves in a circle
   strip.show();
 
 }
