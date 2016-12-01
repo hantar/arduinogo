@@ -1,9 +1,12 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 6 //marked D1 on GEMMA
-/*
-Red Game Code for ArduinGo
-*/
 
+/*
+Red Game Code for ArduinGo 
+Updated 11/30/16
+7:12pm
+
+*/
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, PIN, NEO_GRB + NEO_KHZ800);
 
@@ -16,9 +19,14 @@ int lightButton = 0;
 int lightot = 0;
 int test = 0;
 
+int redTotal = 0;
+int blueTotal = 0;
+
 bool gameOn = false;
 
 int numComparison = 0;
+
+int Time = 2400;
 
 void setup() {
   pinMode(10, OUTPUT);
@@ -34,16 +42,28 @@ void setup() {
 
 
 void loop() {
+ 
+ 
+
   if (Serial.available() > 0) {
     digitalWrite(10, HIGH);
-    delay(3000);
+
     if (Serial.read() == 'D') {
       gameOn = true;
     }
     while (gameOn == true) {
       redRun();
+      Time -= 10;
+      if(Time == 0){
+        gameOn = false;
+
+        }
     }
-  }
+    if(gameOn == false){
+      endGame();
+      }
+    }
+   
 }// end void loop
 
 
@@ -51,6 +71,9 @@ void loop() {
 
 
 void redRun() {
+     if(Serial.read() == 'L'){
+        gameOn = false;
+        }
   for (int i = lightot; i <= lightot + 2; ++i) {
     strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
     noColor(i);
@@ -63,11 +86,9 @@ void redRun() {
       Serial.println('R');
       redScore[i] = 1;
       blueScore[i] = 0;
-      delay(10);
-      while (digitalRead(9) == HIGH) {
-        Serial.println('S');
-        }
-      }// end if for button push
+      delay(20);
+      while (digitalRead(9) == HIGH) {}
+    }// end if for button push
 
     if (Serial.read() == 'B') {
       strip.setPixelColor(sine[i], strip.Color(0, 0, 250));
@@ -105,7 +126,138 @@ void blueArrayComp(int i) {
 void noColor(int i) {
 
   strip.setPixelColor(sine[i - 1], strip.Color(0, 0, 0));
-  delay(300); // controls how slow the light moves in a circle
+  delay(15); // controls how slow the light moves in a circle
   strip.show();
+
+}
+
+
+
+void endGame() {
+  for (int e = 0; e <= 16; ++e) {
+    redTotal += redScore[e];
+    blueTotal += blueScore[e];
+
+  }
+
+  if (redTotal > blueTotal) {
+    RedWin();   
+  }
+  else if(redTotal < blueTotal){
+    BlueWin();
+  }
+}
+
+
+
+void BlueWin(){
+
+ for (int x = 0; x <= 1; ++x) {
+    for (int e = 0; e <= 16; ++e) {
+      strip.setPixelColor(sine[e], strip.Color(0, 0, 250));
+      strip.show();
+      delay(50);
+    }
+
+    for (int e = 15; e >= 0 ; --e) {
+      strip.setPixelColor(sine[e], strip.Color(0, 0, 250));
+      strip.show();
+      delay(50);
+    }
+  }
+  for (int x = 0; x <= 2; ++ x) {
+    strip.setPixelColor(sine[0], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[1], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[2], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[3], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[4], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[5], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[6], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[7], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[8], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[9], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[10], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[11], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[12], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[13], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[14], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+    strip.show();
+    delay(170);
+    strip.setPixelColor(sine[0], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[1], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[2], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[3], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[4], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[5], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[6], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[7], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[8], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[9], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[10], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[11], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[12], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[13], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[14], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 250));
+    strip.show();
+    delay(170);
+  }
+  
+  }
+
+void RedWin() {
+  for (int x = 0; x <= 1; ++x) {
+    for (int e = 0; e <= 16; ++e) {
+      strip.setPixelColor(sine[e], strip.Color(0, 0, 250));
+      strip.show();
+      delay(50);
+    }
+
+    for (int e = 15; e >= 0 ; --e) {
+      strip.setPixelColor(sine[e], strip.Color(0, 0, 0));
+      strip.show();
+      delay(50);
+    }
+  }
+  for (int x = 0; x <= 2; ++ x) {
+    strip.setPixelColor(sine[0], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[1], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[2], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[3], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[4], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[5], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[6], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[7], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[8], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[9], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[10], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[11], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[12], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[13], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[14], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+    strip.show();
+    delay(170);
+    strip.setPixelColor(sine[0], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[1], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[2], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[3], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[4], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[5], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[6], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[7], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[8], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[9], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[10], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[11], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[12], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[13], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[14], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[15], strip.Color(250, 0, 0));
+    strip.show();
+    delay(170);
+  }
+
 
 }
