@@ -122,11 +122,11 @@ void arraycomp(int i) {
       strip.setPixelColor(sine[i], strip.Color(50, 50, 250));
     } // end for if statement
   } // end for for loop
-
+  
   if (blueScore[15] == 0) {
     strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
   }
-
+  
   else if (blueScore[15] == 1) {
     strip.setPixelColor(sine[15], strip.Color(50, 50, 250));
   }
@@ -134,22 +134,18 @@ void arraycomp(int i) {
 
 
 void redArrayComp(int i) {
-
   for (int i = 0; i <= 15; ++i) {
-
     if (redScore[i] == 1) {
       strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
     } // end for if statement
   } // end for for loop
-
-  if (redScore[15] == 0) {
+    if (redScore[15] == 0) {
     strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
   }
-
+  
   else if (redScore[15] == 1) {
     strip.setPixelColor(sine[15], strip.Color(250, 0, 0));
   }
-
 }
 
 
@@ -353,7 +349,7 @@ void newGameReset() {
   for (int i = 0; i <= 15; ++i) {
     redScore[i] = 0;
     blueScore[i] = 0;
-    Serial.println("D");
+    Serial.println("New Game");
   }
   redTotal = 0;
   blueTotal = 0;
