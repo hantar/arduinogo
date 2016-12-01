@@ -1,19 +1,15 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 6 //marked D1 on GEMMA
 
-/*
-Red Game Code for ArduinGo 
-Updated 11/30/16
-7:12pm
-
-*/
+const int buttonPin = 3;     // the number of the pushbutton pin
+const int GrnLed =  12;// the number of the green LED pin
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, PIN, NEO_GRB + NEO_KHZ800);
 
 int blueScore[16];
 int redScore[16];
-
 int sine[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}; //these are the pixels in order of animation-- 36 pixels in total
+
 int button = 9;
 int lightButton = 0;
 int lightot = 0;
@@ -38,13 +34,7 @@ void setup() {
 
 }
 
-
-
-
 void loop() {
- 
- 
-
   if (Serial.available() > 0) {
     digitalWrite(10, HIGH);
 
@@ -54,16 +44,17 @@ void loop() {
     while (gameOn == true) {
       redRun();
       Time -= 10;
-      if(Time == 0){
+      if (Time == 0) {
         gameOn = false;
 
-        }
-    }
-    if(gameOn == false){
-      endGame();
       }
     }
-   
+    if (gameOn == false) {
+      endGame();
+      
+    }
+  }
+newGameReset();
 }// end void loop
 
 
@@ -71,9 +62,9 @@ void loop() {
 
 
 void redRun() {
-     if(Serial.read() == 'L'){
-        gameOn = false;
-        }
+  if (Serial.read() == 'L') {
+    gameOn = false;
+  }
   for (int i = lightot; i <= lightot + 2; ++i) {
     strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
     noColor(i);
@@ -106,53 +97,80 @@ void redRun() {
 
 
 void arraycomp(int i) {
-  for (int i = 0; i <= 16; ++i) {
+  for (int i = 0; i <= 15; ++i) {
     if (redScore[i] == 1) {
-      strip.setPixelColor(sine[i], strip.Color(250, 50, 50));
+      strip.setPixelColor(sine[i], strip.Color(250, 0, 0));
     } // end for if statement
   } // end for for loop
+  if (redScore[15] == 0) {
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+  }
+  else if (redScore[15] == 1) {
+    strip.setPixelColor(sine[15], strip.Color(250, 0, 0));
+  } loop
 } // end for void arraycomp
 
-void blueArrayComp(int i) {
 
-  for (int i = 0; i <= 16; ++i) {
+void blueArrayComp(int i) {
+  for (int i = 0; i <= 15; ++i) {
     if (blueScore[i] == 1) {
       strip.setPixelColor(sine[i], strip.Color(0, 0, 250));
     } // end for if statement
   } // end for for loop
 
+  if (blueScore[15] == 0) {
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+  }
+
+  else if (blueScore[15] == 1) {
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 250));
+  }
 }
 
-void noColor(int i) {
 
+void noColor(int i) {
   strip.setPixelColor(sine[i - 1], strip.Color(0, 0, 0));
   delay(15); // controls how slow the light moves in a circle
   strip.show();
-
 }
-
-
 
 void endGame() {
-  for (int e = 0; e <= 16; ++e) {
+  for (int e = 0; e <= 15; ++e) {
     redTotal += redScore[e];
     blueTotal += blueScore[e];
-
   }
-
   if (redTotal > blueTotal) {
-    RedWin();   
+    RedWin();
+    Serial.println("Red win");
+    Serial.println(redTotal);
+    Serial.println(blueTotal);
+
+    for (int i = 0; i <= 15; ++i) {
+      Serial.print(i);
+      Serial.print(".");
+      Serial.println(redScore[i]);
+      delay(1000);
+    }
   }
-  else if(redTotal < blueTotal){
+
+  if (redTotal < blueTotal) {
     BlueWin();
+    Serial.println("Blue win");
+    Serial.println(redTotal);
+    Serial.println(blueTotal);
+  }
+
+  if (redTotal == blueTotal) {
+    tieGame();
+    Serial.println(redTotal);
+    Serial.println(blueTotal);
   }
 }
 
 
+void BlueWin() {
 
-void BlueWin(){
-
- for (int x = 0; x <= 1; ++x) {
+  for (int x = 0; x <= 1; ++x) {
     for (int e = 0; e <= 16; ++e) {
       strip.setPixelColor(sine[e], strip.Color(0, 0, 250));
       strip.show();
@@ -203,8 +221,7 @@ void BlueWin(){
     strip.show();
     delay(170);
   }
-  
-  }
+}
 
 void RedWin() {
   for (int x = 0; x <= 1; ++x) {
@@ -258,6 +275,59 @@ void RedWin() {
     strip.show();
     delay(170);
   }
+}
 
 
+
+void tieGame() {
+
+  for (int x = 0; x <= 5; ++ x) {
+    strip.setPixelColor(sine[0], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[1], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[2], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[3], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[4], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[5], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[6], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[7], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[8], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[9], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[10], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[11], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[12], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[13], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[14], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+    strip.show();
+    delay(150);
+    strip.setPixelColor(sine[0], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[1], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[2], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[3], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[4], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[5], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[6], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[7], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[8], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[9], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[10], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[11], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[12], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[13], strip.Color(0, 0, 250));
+    strip.setPixelColor(sine[14], strip.Color(250, 0, 0));
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 250));
+    strip.show();
+    delay(150);
+  }
+}
+
+void newGameReset() {
+  Serial.println("Reset");
+  for (int i = 0; i <= 15; ++i) {
+    redScore[i] = 0;
+    blueScore[i] = 0;
+    Serial.println("D");
+  }
+  redTotal = 0;
+  blueTotal = 0;
 }
