@@ -1,0 +1,164 @@
+void newcounttest(){
+	for (int x = 0; x <= 2; x++) {
+		int r,g,b;
+	if (x ==0 ) {
+	r = 255; g = 0; b = 0;
+	strip.setPixelColor(sine[1], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[2], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[3], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[4], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[5], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[6], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[7], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[8], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[9], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[10], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[11], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[12], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[13], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[14], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+    strip.show();
+    delay(170);
+    strip.setPixelColor(sine[0], strip.Color(r,g,b));
+    strip.setPixelColor(sine[1], strip.Color(r,g,b));
+    strip.setPixelColor(sine[2], strip.Color(r,g,b));
+    strip.setPixelColor(sine[3], strip.Color(r,g,b));
+    strip.setPixelColor(sine[4], strip.Color(r,g,b));
+    strip.setPixelColor(sine[5], strip.Color(r,g,b));
+    strip.setPixelColor(sine[6], strip.Color(r,g,b));
+    strip.setPixelColor(sine[7], strip.Color(r,g,b));
+    strip.setPixelColor(sine[8], strip.Color(r,g,b));
+    strip.setPixelColor(sine[9], strip.Color(r,g,b));
+    strip.setPixelColor(sine[10], strip.Color(r,g,b));
+    strip.setPixelColor(sine[11], strip.Color(r,g,b));
+    strip.setPixelColor(sine[12], strip.Color(r,g,b));
+    strip.setPixelColor(sine[13], strip.Color(r,g,b));
+    strip.setPixelColor(sine[14], strip.Color(r,g,b));
+    strip.setPixelColor(sine[15], strip.Color(r,g,b));
+    tone(buzzer,329,800);
+    strip.show();
+    delay(900);
+	}
+
+	if (x == 1){
+		r = 255; g = 51; b = 0;
+	strip.setPixelColor(sine[1], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[2], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[3], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[4], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[5], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[6], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[7], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[8], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[9], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[10], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[11], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[12], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[13], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[14], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+    strip.show();
+    delay(170);
+    strip.setPixelColor(sine[0], strip.Color(r,g,b));
+    strip.setPixelColor(sine[1], strip.Color(r,g,b));
+    strip.setPixelColor(sine[2], strip.Color(r,g,b));
+    strip.setPixelColor(sine[3], strip.Color(r,g,b));
+    strip.setPixelColor(sine[4], strip.Color(r,g,b));
+    strip.setPixelColor(sine[5], strip.Color(r,g,b));
+    strip.setPixelColor(sine[6], strip.Color(r,g,b));
+    strip.setPixelColor(sine[7], strip.Color(r,g,b));
+    strip.setPixelColor(sine[8], strip.Color(r,g,b));
+    strip.setPixelColor(sine[9], strip.Color(r,g,b));
+    strip.setPixelColor(sine[10], strip.Color(r,g,b));
+    strip.setPixelColor(sine[11], strip.Color(r,g,b));
+    strip.setPixelColor(sine[12], strip.Color(r,g,b));
+    strip.setPixelColor(sine[13], strip.Color(r,g,b));
+    strip.setPixelColor(sine[14], strip.Color(r,g,b));
+    strip.setPixelColor(sine[15], strip.Color(r,g,b));
+    tone(buzzer,329,800);
+    strip.show();
+    delay(900);
+	}
+
+	if (x == 2){
+		r = 255; g = 204; b = 0;
+	strip.setPixelColor(sine[1], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[2], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[3], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[4], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[5], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[6], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[7], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[8], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[9], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[10], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[11], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[12], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[13], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[14], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+    strip.show();
+    delay(170);
+    strip.setPixelColor(sine[0], strip.Color(r,g,b));
+    strip.setPixelColor(sine[1], strip.Color(r,g,b));
+    strip.setPixelColor(sine[2], strip.Color(r,g,b));
+    strip.setPixelColor(sine[3], strip.Color(r,g,b));
+    strip.setPixelColor(sine[4], strip.Color(r,g,b));
+    strip.setPixelColor(sine[5], strip.Color(r,g,b));
+    strip.setPixelColor(sine[6], strip.Color(r,g,b));
+    strip.setPixelColor(sine[7], strip.Color(r,g,b));
+    strip.setPixelColor(sine[8], strip.Color(r,g,b));
+    strip.setPixelColor(sine[9], strip.Color(r,g,b));
+    strip.setPixelColor(sine[10], strip.Color(r,g,b));
+    strip.setPixelColor(sine[11], strip.Color(r,g,b));
+    strip.setPixelColor(sine[12], strip.Color(r,g,b));
+    strip.setPixelColor(sine[13], strip.Color(r,g,b));
+    strip.setPixelColor(sine[14], strip.Color(r,g,b));
+    strip.setPixelColor(sine[15], strip.Color(r,g,b));
+    tone(buzzer,329,800);
+    strip.show();
+    delay(900);
+	}
+  }
+
+
+  	int r = 0, g = 255, b = 0;
+	strip.setPixelColor(sine[1], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[2], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[3], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[4], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[5], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[6], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[7], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[8], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[9], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[10], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[11], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[12], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[13], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[14], strip.Color(0, 0, 0));
+    strip.setPixelColor(sine[15], strip.Color(0, 0, 0));
+    strip.show();
+    delay(170);
+    strip.setPixelColor(sine[0], strip.Color(r,g,b));
+    strip.setPixelColor(sine[1], strip.Color(r,g,b));
+    strip.setPixelColor(sine[2], strip.Color(r,g,b));
+    strip.setPixelColor(sine[3], strip.Color(r,g,b));
+    strip.setPixelColor(sine[4], strip.Color(r,g,b));
+    strip.setPixelColor(sine[5], strip.Color(r,g,b));
+    strip.setPixelColor(sine[6], strip.Color(r,g,b));
+    strip.setPixelColor(sine[7], strip.Color(r,g,b));
+    strip.setPixelColor(sine[8], strip.Color(r,g,b));
+    strip.setPixelColor(sine[9], strip.Color(r,g,b));
+    strip.setPixelColor(sine[10], strip.Color(r,g,b));
+    strip.setPixelColor(sine[11], strip.Color(r,g,b));
+    strip.setPixelColor(sine[12], strip.Color(r,g,b));
+    strip.setPixelColor(sine[13], strip.Color(r,g,b));
+    strip.setPixelColor(sine[14], strip.Color(r,g,b));
+    strip.setPixelColor(sine[15], strip.Color(r,g,b));
+    tone(buzzer,987,800);
+    strip.show();
+    delay(900);
+
+}
